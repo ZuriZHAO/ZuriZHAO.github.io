@@ -109,9 +109,42 @@ body {
     text-decoration: underline; /* 鼠标悬停时显示下划线 */
 }
 
+.sidebar h2 {
+    /* 加大名字字号 */
+    font-size: 24px; 
+}
+
 .sidebar-description {
     margin: 10px 20px;
     text-align: center;
-    font-size: 14px;
+    /* 加大描述字号 */
+    font-size: 16px; 
     line-height: 1.4;
+}
+
+.tab {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: bold; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    border-radius: 8px; 
+    /* 加大主页标题字号 */
+    font-size: 18px; 
+}
+
+.tab.active {
+    background-color: #ddd;
+    border-radius: 8px; 
+    /* 加大主页激活标题字号 */
+    font-size: 18px; 
+}
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
 }
