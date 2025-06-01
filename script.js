@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             e.preventDefault();
                             const mdPath = this.getAttribute('href');
                             // 动态拼接完整路径
-                            const fullMdPath = new URL(mdPath, window.location.href).pathname;
+                            const fullMdPath = new URL(mdPath, window.location.href).href;
                             fetch(fullMdPath)
                               .then(response => {
                                     if (!response.ok) {
@@ -72,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         link.addEventListener('click', function(e) {
                             e.preventDefault();
                             const htmlPath = this.getAttribute('href');
-                            // 动态拼接完整路径
-                            const fullHtmlPath = new URL(htmlPath, window.location.href).pathname;
+                            // 动态拼接完整路径，使用 href 属性获取完整 URL
+                            const fullHtmlPath = new URL(htmlPath, window.location.href).href;
                             fetch(fullHtmlPath)
                               .then(response => {
                                     if (!response.ok) {
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         newLink.addEventListener('click', function(e) {
                                             e.preventDefault();
                                             const newMdPath = this.getAttribute('href');
-                                            const newFullMdPath = new URL(newMdPath, window.location.href).pathname;
+                                            const newFullMdPath = new URL(newMdPath, window.location.href).href;
                                             fetch(newFullMdPath)
                                               .then(response => {
                                                     if (!response.ok) {
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         newLink.addEventListener('click', function(e) {
                                             e.preventDefault();
                                             const newHtmlPath = this.getAttribute('href');
-                                            const newFullHtmlPath = new URL(newHtmlPath, window.location.href).pathname;
+                                            const newFullHtmlPath = new URL(newHtmlPath, window.location.href).href;
                                             fetch(newFullHtmlPath)
                                               .then(response => {
                                                     if (!response.ok) {
