@@ -112,15 +112,19 @@ body {
 .sidebar h2 {
     /* 进一步加大名字字号 */
     font-size: 40px; 
-    margin-bottom: 3px; /* 减小名字和描述之间的距离 */
+    margin-bottom: 4px; /* 减小名字和描述之间的距离 */
+    /* 修改为更圆润的字体 */
+    font-family: 'Comic Sans MS', 'Microsoft YaHei UI', cursive;
 }
 
 .sidebar-description {
     margin: 5px 20px; /* 减小上下外边距 */
     text-align: center;
     /* 进一步加大描述字号 */
-    font-size: 18px; 
+    font-size: 22px; 
     line-height: 1.4;
+    /* 修改为更圆润的字体 */
+    font-family: 'Comic Sans MS', 'Microsoft YaHei UI', cursive;
 }
 
 .tab {
@@ -132,16 +136,18 @@ body {
     font-weight: bold; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     border-radius: 8px; 
-    /* 加大主页标题字号 */
-    font-size: 26px; 
+    font-size: 22px; 
+    /* 保持颜色和其他样式 */
+    transition: background-color 0.3s ease;
 }
 
 .tab.active {
     background-color: #ddd;
     border-radius: 8px; 
-    /* 加大主页激活标题字号 */
-    font-size: 18px; 
+    font-size: 22px; /* 确保和非激活状态字体大小一致 */
+    padding: 10px 20px; /* 确保和非激活状态内边距一致 */
 }
+
 .tab-content {
     display: none;
 }
