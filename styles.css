@@ -110,15 +110,16 @@ body {
 }
 
 .sidebar h2 {
-    /* 加大名字字号 */
-    font-size: 24px; 
+    /* 进一步加大名字字号 */
+    font-size: 32px; 
+    margin-bottom: 5px; /* 减小名字和描述之间的距离 */
 }
 
 .sidebar-description {
-    margin: 10px 20px;
+    margin: 5px 20px; /* 减小上下外边距 */
     text-align: center;
-    /* 加大描述字号 */
-    font-size: 16px; 
+    /* 进一步加大描述字号 */
+    font-size: 18px; 
     line-height: 1.4;
 }
 
@@ -147,4 +148,31 @@ body {
 
 .tab-content.active {
     display: block;
+}
+
+.search-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+#search-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#search-button {
+    padding: 5px 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#search-button:hover {
+    background-color: #555;
 }

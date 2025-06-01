@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const tabs = document.querySelectorAll('.tab');
     const contentContainer = document.getElementById('content-container');
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
 
     tabs.forEach(tab => {
         tab.addEventListener('click', function() {
@@ -45,5 +47,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 });
         });
+    });
+
+    searchButton.addEventListener('click', function() {
+        const keyword = searchInput.value.toLowerCase();
+        const allElements = contentContainer.getElementsByTagName('*');
+        
+        for (let i = 0; i < allElements.length; i++) {
+            const element = allElements[i];
+            if (element.textContent) {
+                const text = element.textContent.toLowerCase();
+                if (text.includes(keyword)) {
+                    element.style.backgroundColor = 'yellow';
+                } else {
+                    element.style.backgroundColor = '';
+                }
+            }
+        }
     });
 });
