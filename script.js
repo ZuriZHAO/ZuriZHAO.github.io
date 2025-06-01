@@ -28,7 +28,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             fetch(filePath)
-              .then(response => response.text())
+              .then(response => {
+                    if (!response.ok) {
+                        throw new Error('网络响应失败');
+                    }
+                    return response.text();
+                })
               .then(data => {
                     contentContainer.innerHTML = data;
                     // 为 md 文件链接添加点击事件
@@ -38,13 +43,24 @@ document.addEventListener('DOMContentLoaded', function() {
                             e.preventDefault();
                             const mdPath = this.getAttribute('href');
                             fetch(mdPath)
-                              .then(response => response.text())
+                              .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('网络响应失败');
+                                    }
+                                    return response.text();
+                                })
                               .then(mdContent => {
                                     const htmlContent = marked.parse(mdContent);
                                     contentContainer.innerHTML = htmlContent;
+                                })
+                              .catch(error => {
+                                    console.error('加载 MD 文件时出错:', error);
                                 });
                         });
                     });
+                })
+              .catch(error => {
+                    console.error('加载页面时出错:', error);
                 });
         });
     });
