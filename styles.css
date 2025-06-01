@@ -78,10 +78,18 @@ body {
     padding: 10px 20px;
     margin-right: 10px;
     cursor: pointer;
+    /* 加粗字体 */
+    font-weight: bold; 
+    /* 美化字体，可根据喜好更换字体 */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    /* 让边框更圆润 */
+    border-radius: 8px; 
 }
 
 .tab.active {
     background-color: #ddd;
+    /* 激活状态也应用圆角 */
+    border-radius: 8px; 
 }
 
 .tab-content {
@@ -90,4 +98,20 @@ body {
 
 .tab-content.active {
     display: block;
+}
+
+.main-content h3 a {
+    color: black;
+    text-decoration: none; /* 去除下划线 */
+}
+
+.main-content h3 a:hover {
+    text-decoration: underline; /* 鼠标悬停时显示下划线 */
+}
+
+.sidebar-description {
+    margin: 10px 20px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.4;
 }
