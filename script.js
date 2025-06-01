@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 激活当前标签
             this.classList.add('active');
 
-            // 加载对应的内容
+            // 加载标签页对应的内容
             let filePath = '';
             switch(target) {
                 case 'Home':
@@ -42,20 +42,102 @@ document.addEventListener('DOMContentLoaded', function() {
                         link.addEventListener('click', function(e) {
                             e.preventDefault();
                             const mdPath = this.getAttribute('href');
-                            fetch(mdPath)
+                            // 动态拼接完整路径
+                            const fullMdPath = new URL(mdPath, window.location.href).pathname;
+                            fetch(fullMdPath)
                               .then(response => {
                                     if (!response.ok) {
-                                        throw new Error(`加载 MD 文件失败，状态码: ${response.status}，路径: ${mdPath}`);
+                                        throw new Error(`加载 MD 文件失败，状态码: ${response.status}，路径: ${fullMdPath}`);
                                     }
                                     return response.text();
                                 })
                               .then(mdContent => {
+                                    if (typeof marked === 'undefined') {
+                                        console.error('marked 库未正确加载');
+                                        alert('marked 库未正确加载，请检查 index.html 文件');
+                                        return;
+                                    }
                                     const htmlContent = marked.parse(mdContent);
                                     contentContainer.innerHTML = htmlContent;
                                 })
                               .catch(error => {
                                     console.error('加载 MD 文件时出错:', error);
-                                    alert(`加载 MD 文件失败，请检查文件路径: ${mdPath}`);
+                                    alert(`加载 MD 文件失败，请检查文件路径: ${fullMdPath}`);
+                                });
+                        });
+                    });
+                    // 为 HTML 文件链接添加点击事件
+                    const htmlLinks = contentContainer.querySelectorAll('a[href$=".html"]');
+                    htmlLinks.forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const htmlPath = this.getAttribute('href');
+                            // 动态拼接完整路径
+                            const fullHtmlPath = new URL(htmlPath, window.location.href).pathname;
+                            fetch(fullHtmlPath)
+                              .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(`加载 HTML 文件失败，状态码: ${response.status}，路径: ${fullHtmlPath}`);
+                                    }
+                                    return response.text();
+                                })
+                              .then(htmlContent => {
+                                    contentContainer.innerHTML = htmlContent;
+                                    // 重新绑定 md 和 html 链接的点击事件
+                                    const newMdLinks = contentContainer.querySelectorAll('a[href$=".md"]');
+                                    newMdLinks.forEach(newLink => {
+                                        newLink.addEventListener('click', function(e) {
+                                            e.preventDefault();
+                                            const newMdPath = this.getAttribute('href');
+                                            const newFullMdPath = new URL(newMdPath, window.location.href).pathname;
+                                            fetch(newFullMdPath)
+                                              .then(response => {
+                                                    if (!response.ok) {
+                                                        throw new Error(`加载 MD 文件失败，状态码: ${response.status}，路径: ${newFullMdPath}`);
+                                                    }
+                                                    return response.text();
+                                                })
+                                              .then(newMdContent => {
+                                                    if (typeof marked === 'undefined') {
+                                                        console.error('marked 库未正确加载');
+                                                        alert('marked 库未正确加载，请检查 index.html 文件');
+                                                        return;
+                                                    }
+                                                    const newHtmlContent = marked.parse(newMdContent);
+                                                    contentContainer.innerHTML = newHtmlContent;
+                                                })
+                                              .catch(error => {
+                                                    console.error('加载 MD 文件时出错:', error);
+                                                    alert(`加载 MD 文件失败，请检查文件路径: ${newFullMdPath}`);
+                                                });
+                                        });
+                                    });
+                                    const newHtmlLinks = contentContainer.querySelectorAll('a[href$=".html"]');
+                                    newHtmlLinks.forEach(newLink => {
+                                        newLink.addEventListener('click', function(e) {
+                                            e.preventDefault();
+                                            const newHtmlPath = this.getAttribute('href');
+                                            const newFullHtmlPath = new URL(newHtmlPath, window.location.href).pathname;
+                                            fetch(newFullHtmlPath)
+                                              .then(response => {
+                                                    if (!response.ok) {
+                                                        throw new Error(`加载 HTML 文件失败，状态码: ${response.status}，路径: ${newFullHtmlPath}`);
+                                                    }
+                                                    return response.text();
+                                                })
+                                              .then(newHtmlContent => {
+                                                    contentContainer.innerHTML = newHtmlContent;
+                                                })
+                                              .catch(error => {
+                                                    console.error('加载 HTML 文件时出错:', error);
+                                                    alert(`加载 HTML 文件失败，请检查文件路径: ${newFullHtmlPath}`);
+                                                });
+                                        });
+                                    });
+                                })
+                              .catch(error => {
+                                    console.error('加载 HTML 文件时出错:', error);
+                                    alert(`加载 HTML 文件失败，请检查文件路径: ${fullHtmlPath}`);
                                 });
                         });
                     });
