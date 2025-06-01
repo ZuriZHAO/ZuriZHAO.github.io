@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
 
+    // 找到 Home 标签并模拟点击
+    const homeTab = Array.from(tabs).find(tab => tab.dataset.target === 'Home');
+    if (homeTab) {
+        homeTab.click();
+    }
+
     tabs.forEach(tab => {
         tab.addEventListener('click', function() {
             const target = this.dataset.target;
@@ -72,8 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         link.addEventListener('click', function(e) {
                             e.preventDefault();
                             const htmlPath = this.getAttribute('href');
-                            // 动态拼接完整路径，使用 href 属性获取完整 URL
-                            const fullHtmlPath = new URL(htmlPath, window.location.href).href;
+                            // 确保 base URL 是当前页面的路径
+                            const baseUrl = new URL(filePath, window.location.href);
+                            const fullHtmlPath = new URL(htmlPath, baseUrl).href;
                             fetch(fullHtmlPath)
                               .then(response => {
                                     if (!response.ok) {
@@ -89,7 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                         newLink.addEventListener('click', function(e) {
                                             e.preventDefault();
                                             const newMdPath = this.getAttribute('href');
-                                            const newFullMdPath = new URL(newMdPath, window.location.href).href;
+                                            const newBaseUrl = new URL(fullHtmlPath, window.location.href);
+                                            const newFullMdPath = new URL(newMdPath, newBaseUrl).href;
                                             fetch(newFullMdPath)
                                               .then(response => {
                                                     if (!response.ok) {
@@ -117,7 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                         newLink.addEventListener('click', function(e) {
                                             e.preventDefault();
                                             const newHtmlPath = this.getAttribute('href');
-                                            const newFullHtmlPath = new URL(newHtmlPath, window.location.href).href;
+                                            const newBaseUrl = new URL(fullHtmlPath, window.location.href);
+                                            const newFullHtmlPath = new URL(newHtmlPath, newBaseUrl).href;
                                             fetch(newFullHtmlPath)
                                               .then(response => {
                                                     if (!response.ok) {
