@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
+    const contentContainer = document.getElementById('content-container');
 
     tabs.forEach(tab => {
         tab.addEventListener('click', function() {
@@ -8,13 +8,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 移除所有标签的激活状态
             tabs.forEach(t => t.classList.remove('active'));
-            // 移除所有内容的显示状态
-            tabContents.forEach(content => content.style.display = 'none');
-
             // 激活当前标签
             this.classList.add('active');
-            // 显示对应的内容
-            document.getElementById(target).style.display = 'block';
+
+            // 加载对应的内容
+            let filePath = '';
+            switch(target) {
+                case 'home':
+                    filePath = 'home/index.html';
+                    break;
+                case 'about':
+                    filePath = 'about/index.html';
+                    break;
+                case 'tags':
+                    filePath = 'tags/index.html';
+                    break;
+            }
+
+            fetch(filePath)
+              .then(response => response.text())
+              .then(data => {
+                    contentContainer.innerHTML = data;
+                });
         });
     });
 });

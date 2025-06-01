@@ -12,7 +12,11 @@ body {
     height: 100vh;
     background-color: #333;
     color: white;
-    text-align: center;
+    /* 添加以下两行来实现内容居中 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
 }
 
@@ -36,13 +40,26 @@ body {
     margin: 20px auto;
 }
 
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* 调整图标区域与上方内容的间距 */
+}
+
 .social-links a {
-    margin: 0 10px;
+    margin: 0 15px; /* 增加图标之间的间距 */
+    transition: transform 0.2s ease-in-out; /* 添加过渡效果 */
+}
+
+.social-links a:hover {
+    transform: scale(1.1); /* 鼠标悬停时图标放大 */
 }
 
 .social-links img {
-    width: 30px;
-    height: 30px;
+    width: 35px; /* 适当增大图标尺寸 */
+    height: 35px;
+    filter: invert(100%); /* 如果图标颜色不合适，可以使用滤镜调整 */
 }
 
 .main-content {
