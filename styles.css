@@ -112,9 +112,9 @@ body {
 .sidebar h2 {
     /* 进一步加大名字字号 */
     font-size: 40px; 
-    margin-bottom: 4px; /* 减小名字和描述之间的距离 */
-    /* 修改为更圆润的字体 */
-    font-family: 'Comic Sans MS', 'Microsoft YaHei UI', cursive;
+    margin-bottom: 5px; /* 减小名字和描述之间的距离 */
+    /* 改回原来的字体 */
+    font-family: Arial, sans-serif;
 }
 
 .sidebar-description {
