@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(filePath)
               .then(response => {
                     if (!response.ok) {
-                        throw new Error('网络响应失败');
+                        throw new Error(`网络响应失败，状态码: ${response.status}`);
                     }
                     return response.text();
                 })
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             fetch(mdPath)
                               .then(response => {
                                     if (!response.ok) {
-                                        throw new Error('网络响应失败');
+                                        throw new Error(`加载 MD 文件失败，状态码: ${response.status}，路径: ${mdPath}`);
                                     }
                                     return response.text();
                                 })
@@ -55,12 +55,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                 })
                               .catch(error => {
                                     console.error('加载 MD 文件时出错:', error);
+                                    alert(`加载 MD 文件失败，请检查文件路径: ${mdPath}`);
                                 });
                         });
                     });
                 })
               .catch(error => {
                     console.error('加载页面时出错:', error);
+                    alert(`加载页面失败，请检查文件路径: ${filePath}`);
                 });
         });
     });
