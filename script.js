@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // 加载对应的内容
             let filePath = '';
             switch(target) {
-                case 'home':
-                    filePath = 'home/index.html';
+                case 'Home':
+                    filePath = 'Home/index.html';
                     break;
-                case 'about':
-                    filePath = 'about/index.html';
+                case 'About':
+                    filePath = 'About/index.html';
                     break;
-                case 'tags':
-                    filePath = 'tags/index.html';
+                case 'Tags':
+                    filePath = 'Tags/index.html';
                     break;
             }
 
@@ -29,6 +29,20 @@ document.addEventListener('DOMContentLoaded', function() {
               .then(response => response.text())
               .then(data => {
                     contentContainer.innerHTML = data;
+                    // 为 md 文件链接添加点击事件
+                    const mdLinks = contentContainer.querySelectorAll('a[href$=".md"]');
+                    mdLinks.forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const mdPath = this.getAttribute('href');
+                            fetch(mdPath)
+                              .then(response => response.text())
+                              .then(mdContent => {
+                                    const htmlContent = marked.parse(mdContent);
+                                    contentContainer.innerHTML = htmlContent;
+                                });
+                        });
+                    });
                 });
         });
     });
